@@ -31,7 +31,6 @@ public class SerializerCommand extends CommandBase {
   public void execute() {
     //shut up sean ma
     this.serializer.periodic();
-
   }
 
   // Called once the command ends or is interrupted.

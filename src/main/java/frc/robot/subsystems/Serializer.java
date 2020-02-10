@@ -54,9 +54,9 @@ public class Serializer extends SubsystemBase {
       ballCount = SmartDashboard.getNumber("Ball Count: ", ballCount);
       ballCount++;
       SmartDashboard.putNumber("Ball Count: ", ballCount);
-      
+      System.out.println(ballCount);
     }
-
+    System.out.println("hello world");
     if ((!serializerSensor1.get() || serializerSensor2.get()) && acceptingBalls) {
 
       // serializerMotor1.set(ControlMode.PercentOutput, 0.5);

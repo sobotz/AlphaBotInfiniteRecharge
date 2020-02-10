@@ -1,2 +1,2 @@
-# AlphaBotInfiniteRecharge
-infinite recharge code on the alphabot drive base.
+# rise
+Repository for the 2020 competition.
