@@ -24,7 +24,7 @@ public class Serializer extends SubsystemBase {
   public DigitalInput serializerSensor1;
   public DigitalInput serializerSensor2;
   public DigitalInput launcherSensor;
-  public double ballCount;
+  public double ballCount = 0;
   public boolean acceptingBalls = true;
   public boolean previousLSValue = false;
   public boolean previousSSValue = false;
@@ -49,9 +49,24 @@ public class Serializer extends SubsystemBase {
   }
 
   public void periodic() {
+    System.out.println("Hello");
     SmartDashboard.putBoolean("Sensor 1: ", serializerSensor1.get()); // true
     SmartDashboard.putBoolean("Sensor 2: ", serializerSensor2.get()); // true
-    ballCount = SmartDashboard.getNumber("Ball Count: ", 666);
+       
+    if (ballCount >= 5) {
+      acceptingBalls = false;
+     }else {
+      acceptingBalls = true;
+    }
+
+    if (launcherSensor.get()){
+      if (ballCount >0 && !previousLSValue){
+        ballCount--;
+        SmartDashboard.putNumber("Ball Count: ", ballCount);
+      }
+
+      ballCount = SmartDashboard.getNumber("Ball Count: ", ballCount);
+      System.out.println(serializerSensor1.get());
 
     if (!previousSSValue && serializerSensor2.get() && acceptingBalls) {
       ballCount++;
@@ -67,16 +82,7 @@ public class Serializer extends SubsystemBase {
       // serializerMotor1.set(ControlMode.PercentOutput, 0);
       SmartDashboard.putBoolean("Belts On: ", false);
     }
-    if (ballCount >= 5) {
-      acceptingBalls = false;
-    }else {
-      acceptingBalls = true;
-    }
-    if (launcherSensor.get()){
-      if (ballCount >0 && !previousLSValue){
-        ballCount--;
-        SmartDashboard.putNumber("Ball Count: ", ballCount);
-      }
+  
     }
     previousLSValue = launcherSensor.get();
   }
