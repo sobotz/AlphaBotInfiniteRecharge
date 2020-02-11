@@ -10,16 +10,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Serializer extends SubsystemBase {
   /**
    * Creates a new Serializer.
    */
-  WPI_TalonSRX serializerMotor1;
-  WPI_TalonSRX serializerMotor2;
+  //WPI_TalonSRX serializerMotor1;
+  //WPI_TalonSRX serializerMotor2;
   // WPI_TalonFX serializerMotor; For use with Falcon 500
   public DigitalInput serializerSensor1;
   public DigitalInput serializerSensor2;
@@ -56,7 +56,7 @@ public class Serializer extends SubsystemBase {
     if (!previousSSValue && serializerSensor2.get() && acceptingBalls) {
       ballCount++;
       SmartDashboard.putNumber("Ball Count: ", ballCount);
-      }
+    }
     previousSSValue = serializerSensor2.get();
 
     if (serializerSensor1.get() || serializerSensor2.get() && acceptingBalls) {
@@ -67,8 +67,10 @@ public class Serializer extends SubsystemBase {
       // serializerMotor1.set(ControlMode.PercentOutput, 0);
       SmartDashboard.putBoolean("Belts On: ", false);
     }
-    if (ballCount <= 5) {
+    if (ballCount >= 5) {
       acceptingBalls = false;
+    }else {
+      acceptingBalls = true;
     }
     if (launcherSensor.get()){
       if (ballCount >0 && !previousLSValue){
