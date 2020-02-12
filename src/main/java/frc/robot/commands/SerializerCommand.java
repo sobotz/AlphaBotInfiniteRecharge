@@ -29,8 +29,8 @@ public class SerializerCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //shut up sean ma
     this.serializer.periodic();
+
   }
 
   // Called once the command ends or is interrupted.
