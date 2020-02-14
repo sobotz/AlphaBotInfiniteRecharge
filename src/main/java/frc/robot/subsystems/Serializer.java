@@ -18,8 +18,8 @@ public class Serializer extends SubsystemBase {
   /**
    * Creates a new Serializer.
    */
-  //WPI_TalonSRX serializerMotor1;
-  //WPI_TalonSRX serializerMotor2;
+  // WPI_TalonSRX serializerMotor1;
+  // WPI_TalonSRX serializerMotor2;
   // WPI_TalonFX serializerMotor; For use with Falcon 500
   public DigitalInput serializerSensor1;
   public DigitalInput serializerSensor2;
@@ -53,52 +53,68 @@ public class Serializer extends SubsystemBase {
 
   public void periodic() {
     ballCount = SmartDashboard.getNumber("Ball Count", ballCount);
-    System.out.println("running periodic: "+serializerSensor1.get());
+    System.out.println("running periodic: " + serializerSensor1.get());
     SmartDashboard.putBoolean("Sensor 1: ", !serializerSensor1.get()); // true
     SmartDashboard.putBoolean("Sensor 2: ", !serializerSensor2.get()); // true
 
-   // if (!previousSSValue && serializerSensor2.get() && acceptingBalls) {
-   //   ballCount++;
-      //update ballCount
-   //   SmartDashboard.putNumber("Ball Count: ", ballCount);
-    //}
-   // previousSSValue = serializerSensor2.get();
+    // if (!previousSSValue && serializerSensor2.get() && acceptingBalls) {
+    // ballCount++;
+    // update ballCount
+    // SmartDashboard.putNumber("Ball Count: ", ballCount);
+    // }
+    // previousSSValue = serializerSensor2.get();
 
     if (ballCount < 5 && ballCount >= 0) {
       acceptingBalls = true;
-    }
-    else {
+    } else {
       acceptingBalls = false;
-    }  
+    }
 
-    if(acceptingBalls){
-      if(serializerSensor2.get()){ 
-        if(previousBallCount == ballCount){
+    if (acceptingBalls) {
+      if (serializerSensor2.get()) {
+        if (previousBallCount == ballCount) {
           ballCount++;
-          SmartDashboard.putNumber("Ball Count", ballCount); 
+          SmartDashboard.putNumber("Ball Count", ballCount);
         }
-      }
-      else{
+      } else {
         previousBallCount = ballCount;
       }
     }
-    
-    if(!launcherSensor.get()){
-      if(previousBallCount == ballCount && ballCount >= 0){
+
+    if (!launcherSensor.get()) {
+      if (previousBallCount == ballCount && ballCount >= 0) {
         ballCount--;
         SmartDashboard.putNumber("Ball Count", ballCount);
       }
     }
 
     /*
-       if (launcherSensor.get()){
-            if (ballCount >0 && !previousLSValue){
-            ballCount--;
-        SmartDashboard.putNumber("Ball Count: ", ballCount);
-      }
-    }
-    previousLSValue = launcherSensor.get();
-    */
+     * 
+     * if(ballCount <= 5 && ballCount >= 0){ if(launcherSensor.get()){
+     * if(previousBallCount == ballCount){ SmartDashboard.getNumber("Ball Count",
+     * ballCount); ballCount--; SmartDashboard.putNumber("Ball Count", ballCount); }
+     * } else{ previousBallCount = ballCount; } System.out.println("Hello");
+     * SmartDashboard.putBoolean("Sensor 1: ", serializerSensor1.get()); // true
+     * SmartDashboard.putBoolean("Sensor 2: ", serializerSensor2.get()); // true
+     * 
+     * if (ballCount >= 5) { acceptingBalls = false; }else { acceptingBalls = true;
+     * }
+     * 
+     * if (launcherSensor.get()){ if (ballCount >0 && !previousLSValue){
+     * ballCount--; SmartDashboard.putNumber("Ball Count: ", ballCount); }
+     * 
+     * ballCount = SmartDashboard.getNumber("Ball Count: ", ballCount);
+     * System.out.println(serializerSensor1.get());
+     * 
+     * if (!previousSSValue && serializerSensor2.get() && acceptingBalls) {
+     * ballCount++; SmartDashboard.putNumber("Ball Count: ", ballCount); }
+     * previousSSValue = serializerSensor2.get(); if (serializerSensor1.get() ||
+     * serializerSensor2.get() && acceptingBalls) { /*if (ballCount >= 5) {
+     * acceptingBalls = false; } else { acceptingBalls = true; } if
+     * (launcherSensor.get()){ if (ballCount >0 && !previousLSValue){ ballCount--;
+     * SmartDashboard.putNumber("Ball Count: ", ballCount); } } previousLSValue =
+     * launcherSensor.get();
+     */
 
     if ((serializerSensor1.get() || serializerSensor2.get()) && acceptingBalls) {
       // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
@@ -112,7 +128,6 @@ public class Serializer extends SubsystemBase {
 
   public void moveBeltsForward() {
     acceptingBalls = false;
-
     while (launcherSensor.get()) {
       // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
       SmartDashboard.putBoolean("Belts On: ", true);
