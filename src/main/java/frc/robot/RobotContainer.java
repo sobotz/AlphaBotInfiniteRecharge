@@ -51,8 +51,6 @@ public class RobotContainer {
     this.m_backCommand = new BackCommand(this.m_serializer);
     this.m_launchPrepCommand = new LaunchPrepCommand(this.m_serializer);
     configureButtonBindings();
-    this.m_serializer.setDefaultCommand(this.m_serializerCommand);
-
   }
 
   /**
