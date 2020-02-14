@@ -75,5 +75,6 @@ public class RobotContainer {
   public Command getTeleopCommand() {
     // An ExampleCommand will run in autonomous
     return this.m_serializerCommand;
+    return this.m_driveCommand;
   }
 }
