@@ -29,9 +29,9 @@ public final class Constants {
     // public static final int SERIALIZER_MOTOR = 0; For use with Falcon 500
 
     // Sensors
-    public static final int PHOTOELECTRIC_SENSOR_1 = 7;
-    public static final int PHOTOELECTRIC_SENSOR_2 = 8;
-    public static final int PHOTOELECTRIC_SENSOR_3 = 9;
+    public static final int PHOTOELECTRIC_SENSOR_1 = 2;
+    public static final int PHOTOELECTRIC_SENSOR_2 = 0;
+    public static final int PHOTOELECTRIC_SENSOR_3 = 1;
     // Controllers
     public static final int JOYSTICK = 0;
 }
