@@ -8,16 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Serializer;
 
-public class LaunchPrepCommand extends CommandBase {
+public class TestLaunchCommand extends CommandBase {
 
   private Serializer serializer;
+  private Launcher launcher;
 
-  public LaunchPrepCommand(Serializer serializer1) {
+  public TestLaunchCommand(Serializer serializer1, Launcher launcher1) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.serializer = serializer1;
+    this.launcher = launcher1;
     addRequirements(serializer);
+    addRequirements(launcher);
   }
 
   // Called when the command is initially scheduled.
@@ -28,9 +32,21 @@ public class LaunchPrepCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      this.serializer.moveBeltsForward();
+    this.serializer.moveBeltsForward();
+    this.launcher.startLauncher();
+    this.launcher.startRollers();
+    while (this.serializer.previousBallCount != this.serializer.ballCount) {
+      try {
+        wait(10); 
+      } catch (InterruptedException e) {
+        e.printStackTrace(); // tell us where the problem might occur
+      }
+    }
+    this.launcher.stopRollers();
+    this.launcher.stopLauncher();
   }
 
+    
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

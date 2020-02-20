@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.BackCommand;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.LaunchPrepCommand;
+import frc.robot.commands.TestLaunchCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Serializer;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -32,8 +33,9 @@ public class RobotContainer {
   // So basically
   public Joystick m_driverController;
   private Serializer m_serializer;
+  private Launcher m_launcher;
   private BackCommand m_backCommand;
-  private LaunchPrepCommand m_launchPrepCommand;
+  private TestLaunchCommand m_testLaunchCommand;
   
 
   /**
@@ -44,10 +46,11 @@ public class RobotContainer {
     this.m_driverController = new Joystick(Constants.JOYSTICK);
     this.m_drivetrain = new DriveTrain();
     this.m_serializer = new Serializer();
+    this.m_launcher = new Launcher();
     this.m_driveCommand = new DriveCommand((() -> this.m_driverController.getRawAxis(0)),
         (() -> this.m_driverController.getRawAxis(1)), this.m_drivetrain);
     this.m_backCommand = new BackCommand(this.m_serializer);
-    this.m_launchPrepCommand = new LaunchPrepCommand(this.m_serializer);
+    this.m_testLaunchCommand = new TestLaunchCommand(this.m_serializer, this.m_launcher);
     configureButtonBindings();
   }
 
@@ -61,7 +64,7 @@ public class RobotContainer {
     //JoystickButton  bob = new JoystickButton(m_driveController, 0);
     JoystickButton ballPrep = new JoystickButton(m_driverController, 1);
     JoystickButton ballsBack = new JoystickButton(m_driverController, 2);
-    ballPrep.toggleWhenPressed(this.m_launchPrepCommand);
+    ballPrep.toggleWhenPressed(this.m_testLaunchCommand);
     ballsBack.toggleWhenPressed(this.m_backCommand);
   }
 

@@ -26,7 +26,9 @@ public final class Constants {
     //Serializer Motors
     public static final int TOP_SERIALIZER_MOTOR = 0;
     public static final int BOTTOM_SERIALIZER_MOTOR = 0;
-    // public static final int SERIALIZER_MOTOR = 0; For use with Falcon 500
+    public static final int SERIALIZER_MOTOR = 0; 
+    public static final int LAUNCHER_MOTOR = 0;
+    public static final int ROLLER_MOTOR = 0; //For use with Falcon 500
 
     // Sensors
     public static final int PHOTOELECTRIC_SENSOR_1 = 2;

@@ -103,19 +103,18 @@ public class Serializer extends SubsystemBase {
 
   public void moveBeltsForward() {
     acceptingBalls = false;
-
-    //while (launcherSensor.getVolate() < .85) {
+    while (launcherSensor.getVoltage() < .85) {
       // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
       SmartDashboard.putBoolean("Belts On: ", true);
-    
+    }
    //  serializerMotor1.set(ControlMode.PercentOutput, 0);
     SmartDashboard.putBoolean("Belts On: ", false);
-  }
+  } 
   public void moveBack() {
-    //while (serializerSensor2.getVolate() < .85) {
+    while (serializerSensor2.getVoltage() < .85) {
       // serializerMotor1.set(ControlMode.PercentOutput, -0.5);
-      //SmartDashboard.putBoolean("Belts On: ", true);
-    //}
+      SmartDashboard.putBoolean("Belts On: ", true);
+    }
     // serializerMotor1.set(ControlMode.PercentOutput, 0);
     SmartDashboard.putBoolean("Belts On: ", false);
     acceptingBalls = true;
