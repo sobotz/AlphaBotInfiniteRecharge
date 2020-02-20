@@ -61,7 +61,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // JoystickButton bob = new JoystickButton(m_driveController, 0);
+    //JoystickButton  bob = new JoystickButton(m_driveController, 0);
     JoystickButton ballPrep = new JoystickButton(m_driverController, 1);
     JoystickButton ballsBack = new JoystickButton(m_driverController, 2);
     ballPrep.toggleWhenPressed(this.m_launchPrepCommand);
@@ -75,7 +75,6 @@ public class RobotContainer {
    */
   public Command getTeleopCommand() {
     // An ExampleCommand will run in autonomous
-    return this.m_serializerCommand;
     return this.m_driveCommand;
   }
 }
