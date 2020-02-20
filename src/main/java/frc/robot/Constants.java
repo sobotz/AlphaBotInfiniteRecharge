@@ -23,6 +23,15 @@ public final class Constants {
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1;
     public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 3;
     public static final int DRIVETRAIN_LEFT_BACK_SPARK = 0;
+    //Serializer Motors
+    public static final int TOP_SERIALIZER_MOTOR = 0;
+    public static final int BOTTOM_SERIALIZER_MOTOR = 0;
+    // public static final int SERIALIZER_MOTOR = 0; For use with Falcon 500
+
+    // Sensors
+    public static final int PHOTOELECTRIC_SENSOR_1 = 7;
+    public static final int PHOTOELECTRIC_SENSOR_2 = 8;
+    public static final int PHOTOELECTRIC_SENSOR_3 = 9;
     // Controllers
     public static final int JOYSTICK = 0;
 }
