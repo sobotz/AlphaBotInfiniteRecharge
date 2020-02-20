@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.BackCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.LaunchPrepCommand;
-import frc.robot.commands.SerializerCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Serializer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,7 +34,6 @@ public class RobotContainer {
   private Serializer m_serializer;
   private BackCommand m_backCommand;
   private LaunchPrepCommand m_launchPrepCommand;
-  private SerializerCommand m_serializerCommand;
   
 
   /**
@@ -46,7 +44,6 @@ public class RobotContainer {
     this.m_driverController = new Joystick(Constants.JOYSTICK);
     this.m_drivetrain = new DriveTrain();
     this.m_serializer = new Serializer();
-    this.m_serializerCommand = new SerializerCommand(m_serializer);
     this.m_driveCommand = new DriveCommand((() -> this.m_driverController.getRawAxis(0)),
         (() -> this.m_driverController.getRawAxis(1)), this.m_drivetrain);
     this.m_backCommand = new BackCommand(this.m_serializer);
