@@ -14,46 +14,44 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-
-
 public class Launcher extends SubsystemBase {
-  
+
   /**
    * Creates a new Launcher.
    */
 
-  WPI_TalonFX launcherMotor;
+  public WPI_TalonFX launcherMotor;
   WPI_TalonSRX rollerMotor;
-  
+
   public Launcher() {
     launcherMotor = new WPI_TalonFX(Constants.LAUNCHER_MOTOR);
-    rollerMotor= new WPI_TalonSRX(Constants.ROLLER_MOTOR);
-    
+    rollerMotor = new WPI_TalonSRX(Constants.ROLLER_MOTOR);
+
     launcherMotor.configFactoryDefault();
     rollerMotor.configFactoryDefault();
   }
 
-  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void startRollers(){
+
+  public void startRollers() {
     rollerMotor.set(ControlMode.PercentOutput, 0.5);
-  
+
   }
 
-  public void stopRollers(){ 
+  public void stopRollers() {
     rollerMotor.set(ControlMode.PercentOutput, 0);
 
   }
-  
-  public void startLauncher(){
+
+  public void startLauncher() {
     launcherMotor.set(ControlMode.PercentOutput, 0.5);
 
   }
 
-  public void stopLauncher(){
+  public void stopLauncher() {
     launcherMotor.set(ControlMode.PercentOutput, 0);
   }
 }

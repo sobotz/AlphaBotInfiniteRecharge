@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Serializer;
@@ -15,6 +16,7 @@ public class LaunchAllCommand extends CommandBase {
 
   private Serializer serializer;
   private Launcher launcher;
+
   /**
    * Creates a new LaunchAllCommand.
    */
@@ -38,11 +40,12 @@ public class LaunchAllCommand extends CommandBase {
     this.launcher.startLauncher();
     this.launcher.startRollers();
     while (this.serializer.ballCount != 0) {
-      try {
-        wait(10); 
-      } catch (InterruptedException e) {
-        e.printStackTrace(); // tell us where the problem might occur
+      this.launcher.stopRollers();
+      while (this.launcher.launcherMotor.getSelectedSensorVelocity() != 7) {
+        Timer.delay(0.01);
       }
+      this.launcher.startRollers();
+      Timer.delay(0.2);
     }
     this.launcher.stopRollers();
     this.launcher.stopLauncher();
