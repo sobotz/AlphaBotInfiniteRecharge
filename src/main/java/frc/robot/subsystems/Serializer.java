@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Timer;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -98,10 +99,9 @@ public class Serializer extends SubsystemBase {
 
   public void moveBeltsForward() {
     acceptingBalls = false;
-    while (launcherSensor.getVoltage() < .85) {
-      // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
-      SmartDashboard.putBoolean("Belts On: ", true);
-    }
+    // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
+    SmartDashboard.putBoolean("Belts On: ", true);
+    Timer.delay(0.12 * ballCount);
     // serializerMotor1.set(ControlMode.PercentOutput, 0);
     SmartDashboard.putBoolean("Belts On: ", false);
   }
