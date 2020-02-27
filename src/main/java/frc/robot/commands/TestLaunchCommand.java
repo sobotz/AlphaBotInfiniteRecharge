@@ -33,6 +33,7 @@ public class TestLaunchCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // movebeltsforward + starts launcher
     this.serializer.moveBeltsForward();
     this.launcher.startLauncher();
     while (this.serializer.previousBallCount != this.serializer.ballCount) {
