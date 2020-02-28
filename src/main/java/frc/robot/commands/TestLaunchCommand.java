@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -38,7 +38,7 @@ public class TestLaunchCommand extends CommandBase {
     this.launcher.startLauncher();
     while (this.serializer.previousBallCount != this.serializer.ballCount) {
       this.launcher.stopRollers();
-      while (this.launcher.launcherMotor.getSelectedSensorVelocity() != 7) {
+      while (this.launcher.launcherMotor.getSelectedSensorVelocity() != 7) { 
         Timer.delay(0.01);
       }
       this.launcher.startRollers();

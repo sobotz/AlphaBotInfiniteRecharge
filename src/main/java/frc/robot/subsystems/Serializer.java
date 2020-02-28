@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -31,10 +31,10 @@ public class Serializer extends SubsystemBase {
   // Initializes variables that wiil be used in the program
   public double ballCount = 0.0;
   public boolean acceptingBalls = true;
-  public boolean previousLSValue = false;
-  public boolean previousSSValue = false;
-  public boolean serializerSensor1Value;
-  public boolean serializerSensor2Value;
+  public boolean previousLSValue = false;  //previous launcher sensor value
+  public boolean previousSSValue = false;  //previous serializer sensor value 
+  public boolean serializerSensor1Value;  //first sensor true means ball
+  public boolean serializerSensor2Value;  //sec sensor 
   public double previousBallCount;
 
   public Serializer() {
@@ -63,10 +63,16 @@ public class Serializer extends SubsystemBase {
     SmartDashboard.putNumber("Sensor 1: ", serializerSensor1.getVoltage()); // true
     SmartDashboard.putNumber("Sensor 2: ", serializerSensor2.getVoltage()); // true
 
-    // boolean value later utilized in an if statement
-    acceptingBalls = ballCount < 5 && ballCount >= 0;
+    if (!previousSSValue && serializerSensor2.getVoltage() < .85 && acceptingBalls) {
+      ballCount++;
+      // update ballCount
+      ballCount = SmartDashboard.getNumber("Ball Count", ballCount);
+      SmartDashboard.putNumber("Ball Count: ", ballCount);
+      previousSSValue = true;
+    }
 
-    // if the ballCount is less than 5 but greater than/equal to 0
+    acceptingBalls = ballCount < 5 && ballCount >= 0;//not sure
+/*
     if (acceptingBalls) {
       if (serializerSensor2Value) {
         if (previousBallCount == ballCount) {
@@ -80,23 +86,19 @@ public class Serializer extends SubsystemBase {
         previousBallCount = ballCount;
       }
     }
-    // sets previous value to current sensor activation
-    previousSSValue = serializerSensor2.getVoltage() < 0.85;
-
-    // 3rd sensor is tripped
+*/
     if (launcherSensor.getVoltage() < 0.85) {
       if (ballCount > 0 && !previousLSValue) {
         // decrement ballCount by 1
         ballCount--;
         // update ballCount
         SmartDashboard.putNumber("Ball Count: ", ballCount);
+      previousLSValue = true;
       }
     }
-    // sets previous value to current sensor activation
-    previousLSValue = launcherSensor.getVoltage() < .85;
 
     if ((serializerSensor1.getVoltage() < .85 || serializerSensor2.getVoltage() < .85) && acceptingBalls) {
-      // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
+      //serializerMotor1.set(ControlMode.PercentOutput, 0.5);
       SmartDashboard.putBoolean("Belts On: ", true);
     } else {
       // serializerMotor1.set(ControlMode.PercentOutput, 0);
