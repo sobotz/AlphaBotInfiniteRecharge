@@ -36,4 +36,5 @@ public final class Constants {
     public static final int PHOTOELECTRIC_SENSOR_3 = 1;
     // Controllers
     public static final int JOYSTICK = 0;
+    public static final double LAUNCHER_VELOCITY_MS= 2.82;
 }

@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2020 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -27,6 +27,8 @@ public class Launcher extends SubsystemBase {
     launcherMotor = new WPI_TalonFX(Constants.LAUNCHER_MOTOR);
     rollerMotor = new WPI_TalonSRX(Constants.ROLLER_MOTOR);
 
+    launcherMotor.set(ControlMode.Velocity, 28.2);
+
     launcherMotor.configFactoryDefault();
     rollerMotor.configFactoryDefault();
   }
@@ -37,21 +39,21 @@ public class Launcher extends SubsystemBase {
   }
 
   public void startRollers() {
-    rollerMotor.set(ControlMode.PercentOutput, 0.5);
+    rollerMotor.set(ControlMode.Velocity, Constants.LAUNCHER_VELOCITY_MS);
 
   }
 
   public void stopRollers() {
-    rollerMotor.set(ControlMode.PercentOutput, 0);
+    rollerMotor.set(ControlMode.Velocity, 0);
 
   }
 
   public void startLauncher() {
-    launcherMotor.set(ControlMode.PercentOutput, 0.5);
+    launcherMotor.set(ControlMode.Velocity, Constants.LAUNCHER_VELOCITY_MS);
 
   }
 
   public void stopLauncher() {
-    launcherMotor.set(ControlMode.PercentOutput, 0);
+    launcherMotor.set(ControlMode.Velocity, 0);
   }
 }
