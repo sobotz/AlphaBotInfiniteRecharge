@@ -71,7 +71,7 @@ public class Serializer extends SubsystemBase {
       previousSSValue = true;
     }
 
-    acceptingBalls = ballCount < 5 && ballCount >= 0;//not sure
+    acceptingBalls = ballCount < 5; //Took out >= 0 because we should still be able to accept balls even when negative
 /*
     if (acceptingBalls) {
       if (serializerSensor2Value) {
@@ -82,7 +82,7 @@ public class Serializer extends SubsystemBase {
           ballCount = SmartDashboard.getNumber("Ball Count", ballCount);
           SmartDashboard.putNumber("Ball Count", ballCount);
         }
-      } else { // Saira pick one of the increment statements there are two
+      } else { 
         previousBallCount = ballCount;
       }
     }
@@ -97,8 +97,9 @@ public class Serializer extends SubsystemBase {
       }
     }
 
-    if ((serializerSensor1.getVoltage() < .85 || serializerSensor2.getVoltage() < .85) && acceptingBalls) {
+    if ((serializerSensor1.getVoltage() < .85 && acceptingBalls) {
       //serializerMotor1.set(ControlMode.PercentOutput, 0.5);
+      Timer.delay(0.12); //check 
       SmartDashboard.putBoolean("Belts On: ", true);
     } else {
       // serializerMotor1.set(ControlMode.PercentOutput, 0);
@@ -117,8 +118,8 @@ public class Serializer extends SubsystemBase {
     // serializerMotor1.set(ControlMode.PercentOutput, 0.5);
     // lets us know if the belts are running
     SmartDashboard.putBoolean("Belts On: ", true);
-    // changes the ammount of time moved forward based on the ball count
-    Timer.delay(0.12 * ballCount);
+    // changes the amount of time moved forward based on the ball count
+    Timer.delay(0.12 * ballCount); //check
     // turns serializer motor on
     // serializerMotor1.set(ControlMode.PercentOutput, 0);
     // outputs belt state to the smart dashboard

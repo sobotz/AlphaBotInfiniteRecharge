@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Serializer;
+import frc.robot.Constants;
 
 public class LaunchAllCommand extends CommandBase {
 
@@ -38,27 +39,31 @@ public class LaunchAllCommand extends CommandBase {
   public void execute() {
     this.serializer.moveBeltsForward();
     this.launcher.startLauncher();
-    this.launcher.startRollers();
+
     while (this.serializer.ballCount != 0) {
       this.launcher.stopRollers();
-      while (this.launcher.launcherMotor.getSelectedSensorVelocity() != 7) {
-        Timer.delay(0.01);
+      while (this.launcher.launcherMotor.getSelectedSensorVelocity() !=  Constants.LAUNCHER_VELOCITY_MS) {
+        Timer.delay(0.01); //check
       }
       this.launcher.startRollers();
-      Timer.delay(0.2);
+      Timer.delay(0.2); //check
     }
-    this.launcher.stopRollers();
-    this.launcher.stopLauncher();
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    this.launcher.stopRollers();
+    this.launcher.stopLauncher();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+     if(this.ballCount <= 0){
+    return true;  
+    }
     return false;
   }
 }
