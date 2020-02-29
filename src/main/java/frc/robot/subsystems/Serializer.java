@@ -29,12 +29,12 @@ public class Serializer extends SubsystemBase {
   public AnalogInput launcherSensor;
 
   // Initializes variables that wiil be used in the program
-  public double ballCount = 0.0;
+  public static double ballCount = 0.0;
   public boolean acceptingBalls = true;
-  public boolean previousLSValue = false;  //previous launcher sensor value
-  public boolean previousSSValue = false;  //previous serializer sensor value 
-  public boolean serializerSensor1Value;  //first sensor true means ball
-  public boolean serializerSensor2Value;  //sec sensor 
+  public boolean previousLSValue = false; // previous launcher sensor value
+  public boolean previousSSValue = false; // previous serializer sensor value
+  public boolean serializerSensor1Value; // first sensor true means ball
+  public boolean serializerSensor2Value; // sec sensor
   public double previousBallCount;
 
   public Serializer() {
@@ -50,9 +50,10 @@ public class Serializer extends SubsystemBase {
      * 
      * serializerMotor1.configFactoryDefault();
      */
-    // serializerMotor = new WPI_TalonFX(Constants.SERIALIZER_MOTOR);66
+    // serializerMotor = new WPI_TalonFX(Constants.SERIALIZER_MOTOR);
   }
 
+  
   // Called every time the Command Scheduler runs (every 20 miliseconds)
   public void periodic() {
     // Recieves possible user input from the smart dashboard
@@ -97,7 +98,7 @@ public class Serializer extends SubsystemBase {
       }
     }
 
-    if ((serializerSensor1.getVoltage() < .85 && acceptingBalls) {
+    if ((serializerSensor1.getVoltage() < .85 && acceptingBalls)) {
       //serializerMotor1.set(ControlMode.PercentOutput, 0.5);
       Timer.delay(0.12); //check 
       SmartDashboard.putBoolean("Belts On: ", true);

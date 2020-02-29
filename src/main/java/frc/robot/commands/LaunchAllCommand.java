@@ -48,7 +48,7 @@ public class LaunchAllCommand extends CommandBase {
       this.launcher.startRollers();
       Timer.delay(0.2); //check
     }
-
+ 
   }
 
   // Called once the command ends or is interrupted.
@@ -61,7 +61,7 @@ public class LaunchAllCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-     if(this.ballCount <= 0){
+     if(this.serializer.ballCount <= 0){
     return true;  
     }
     return false;

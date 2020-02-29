@@ -58,7 +58,7 @@ public class TestLaunchCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(this.ballCount <= 0){
+    if(this.serializer.ballCount <= 0){
     return true;  
     }
     return false;
